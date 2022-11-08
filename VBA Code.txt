@@ -1,0 +1,71 @@
+Sub Get_Unique_Value()
+Set myRng = Range("A252:A753001")
+Set r = Range("I2")
+myRng.AdvancedFilter Action:=xlFilterCopy, _
+CriteriaRange:=myRange, CopyToRange:=r, Unique:=True
+
+End Sub
+
+
+
+Sub Get_Stock_Data()
+'
+' Get_Stock_Data Macro
+'
+
+'
+    Columns("I:I").Select
+    Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    Columns("A:A").Select
+    Selection.Insert Shift:=xlToRight, CopyOrigin:=xlFormatFromLeftOrAbove
+    Range("A2").Select
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = "=RC[1]&RC[2]"
+    Range("B2").Select
+    Selection.End(xlDown).Select
+    Range("A753001").Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.FillDown
+    Range("A752999").Select
+    Selection.End(xlUp).Select
+    Range("L2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=VLOOKUP(Extract&""20181231"",R1C1:R753001C7,7,0)-VLOOKUP(Extract&""20180102"",R1C1:R753001C7,4,0)"
+    Range("L2:L3").Select
+    Selection.FillDown
+    Range("L2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=VLOOKUP(R[-1]C[-1]&""20181231"",R1C1:R753001C7,7,0)-VLOOKUP(R[-1]C[-1]&""20180102"",R1C1:R753001C7,4,0)"
+    Range("L2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=VLOOKUP(RC[-1]&""20181231"",R1C1:R753001C7,7,0)-VLOOKUP(RC[-1]&""20180102"",R1C1:R753001C7,4,0)"
+    Range("L2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    Selection.FillDown
+    Range("K3").Select
+    Selection.End(xlDown).Select
+    Range("L3001").Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.FillDown
+    Range("L2999").Select
+    Selection.End(xlUp).Select
+    Range("M2").Select
+    ActiveCell.FormulaR1C1 = _
+        "=RC[-1]/VLOOKUP(RC[-2]&""20180102"",R1C1:R753001C4,4,0)"
+    Range("L2").Select
+    Selection.End(xlDown).Select
+    Range("M3001").Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.FillDown
+    Range("M2998").Select
+    Selection.End(xlUp).Select
+    Range("N2").Select
+    ActiveCell.FormulaR1C1 = "=SUMIF(R2C2:R753001C2,RC[-3],R2C8:R753001C8)"
+    Range("M2").Select
+    Selection.End(xlDown).Select
+    Range("N3001").Select
+    Range(Selection, Selection.End(xlUp)).Select
+    Selection.FillDown
+End Sub
+
+
